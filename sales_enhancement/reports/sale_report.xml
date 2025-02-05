@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="fintech_sale_order_quotations_report" model="report.paperformat">
+        <field name="name">Fintech print</field>
+        <field name="default" eval="False"/>
+        <field name="disable_shrinking" eval="True"/>
+        <field name="format">A4</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+       <field name="margin_top">35</field>
+        <field name="margin_bottom">25</field>
+        <field name="margin_left">0</field>
+        <field name="margin_right">0</field>
+        <field name="dpi">100</field>
+    </record>
+
+    <record id="sale_order_quotations_report" model="ir.actions.report">
+        <field name="name">Elegant Kitchen Trading</field>
+        <field name="model">sale.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">sales_enhancement.quotations_template</field>
+        <field name="report_file">sales_enhancement.sale_order_quotations_template</field>
+        <field name="binding_model_id" ref="sales_enhancement.model_sale_order"/>
+        <field name="binding_type">report</field>
+        <field name="print_report_name">
+            (object.state in ('draft', 'sent') and 'Quotation - %s' % (object.partner_id.name)) or 'Order - %s' % (object.partner_id.name)
+        </field>
+        <field name="paperformat_id" ref="sales_enhancement.fintech_sale_order_quotations_report"/>
+    </record>
+    <record id="sale.action_report_pro_forma_invoice" model="ir.actions.report">
+        <field name="binding_model_id" eval="False"/>
+    </record>
+    <record id="sale.action_report_saleorder" model="ir.actions.report">
+        <field name="binding_model_id" eval="False"/>
+    </record>
+
+
+</odoo>

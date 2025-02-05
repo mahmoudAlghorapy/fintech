@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="invoice_template_custom">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-set="convert_to_arabic" t-value="request.env['sale.order'].convert_to_arabic"/>
+                <t t-call="web.basic_layout">
+                    <style>
+                        user_idstable.custom-border {
+                        border: 1px solid black;
+                        border-collapse: collapse;
+                        }
+                        th.custom , td.custom {
+                        border: 1px solid black;
+                        padding: 5px;
+                        vertical-align: middle;
+                        text-align: center;
+                        }
+                        .r {
+                        text-align: right;
+                        }
+                        .l {
+                        text-align: left;
+                        }
+                        .multiline {
+                        white-space: pre-wrap;
+                        word-wrap: break-word;
+                        }
+                    </style>
+                    <div class="page" style="direction:ltr;font-size:13.0pt; font-family:Calibri; font-weight:normal;">
+                        <div class="header">
+
+                            <div class="logo col-12" style=" margin-right:300px; ">
+                                <img src="/accounting_enhancement/static/src/img/header.png"
+                                     style="max-height: 150px;max-width:100%;" alt="Logo"/>
+                            </div>
+
+                        </div>
+                        <!--                        <div class="footer">-->
+
+                        <!--                            <div class="logo col-12" style=" margin-right:300px; ">-->
+                        <!--                                <img src="/sales_enhancement/static/src/img/footer.png"-->
+                        <!--                                     style="max-height: 150px;max-width:100%;" alt="Logo"/>-->
+                        <!--                            </div>-->
+
+                        <!--                        </div>-->
+
+                        <br/>
+                        <div class="mt-3 row">
+                            <div class="col-5"
+                                 style="margin: 10px 0; padding: 10px;border-radius: 5px; border: 2px solid black; display: flex; align-items: center; justify-content: space-between;">
+
+
+                                <t t-if="doc.partner_id">
+                                    <strong>To:</strong>
+                                    <br/>
+                                    <strong style="color: blue;">
+                                        <span t-field="doc.partner_id"/>
+                                    </strong>
+
+                                </t>
+                                <br/>
+                                <strong>
+                                    Phone Number:
+                                </strong>
+                                <strong style="color: blue;">
+                                    <span t-field="doc.partner_id.phone"/>
+                                </strong>
+                                <br/>
+                                <strong>
+                                    Mobile Number:
+                                </strong>
+                                <strong style="color: blue;">
+                                    <span t-field="doc.partner_id.mobile"/>
+                                </strong>
+                                <br/>
+                                <strong>
+                                    Email:
+                                </strong>
+                                <strong style="color: blue;">
+                                    <span t-field="doc.partner_id.email"/>
+                                </strong>
+                                <br/>
+                                <strong>
+
+                                    Address:
+                                </strong>
+                                <strong style="color: blue;">
+                                    <span t-field="doc.partner_id.city"/>
+                                    <span t-field="doc.partner_id.country_id"/>
+
+                                </strong>
+                            </div>
+                            <div class="col-2">
+                            </div>
+                            <div class="col-5"
+                                 style="margin: 10px 0; padding: 10px; border-radius: 5px; border: 2px dashed black; display: flex; align-items: center; justify-content: space-between;">
+                                <strong style="color: blue;">
+                                    <h2>&#160;&#160;&#160;&#160;&#160;&#160;&#160; INVOICE</h2>
+                                    Invoice No. :
+                                    <span t-field="doc.name"/>
+                                    <br/>
+                                    Invoice Date:
+                                    <span t-field="doc.invoice_date"/>
+                                    <br/>
+                                    Quotation NO.:
+                                    <span t-field="doc.sale_order_id"/>
+                                    <br/>
+                                    Delivery Note:
+                                    <span t-field="doc.user_id"/>
+                                    <br/>
+                                    LPO:
+                                    <!--                                <span t-field="doc.user_id"/>-->
+                                    <br/>
+                                    T.O.P:
+                                    <!--                                <span t-field="doc.user_id"/>-->
+                                    <br/>
+                                    Warranty:
+                                    <span t-field="doc.has_warranty"/>
+                                </strong>
+
+                            </div>
+                        </div>
+                        <div style="margin: 10px 0; padding: 10px; background-color: #f4f4f4; border-radius: 5px; border: 2px solid black; display: flex; align-items: center; justify-content: space-between;">
+                            <strong>
+                                Subject:-----------------------------------------------------------------------------------
+                            </strong>
+
+                        </div>
+                        <table class="table table-borderless" style="color: blue;">
+                            <thead style="background-color:#C5C5C5; font-size: 15px;">
+                                <tr>
+                                    <th style="text-align: center; border: 1px solid black; padding: 8px;">S/No
+                                        <br/>
+                                        الرقم
+                                    </th>
+                                    <th style="text-align: center; border: 1px solid black; padding: 8px;">SKU/No
+                                        <br/>
+                                        رقم الجزء
+                                    </th>
+                                    <th style="text-align: center; border: 1px solid black; padding: 8px;">Description /
+                                        Product
+                                        <br/>
+                                        اسم السلعة \ الوصف
+                                    </th>
+
+                                    <th style="text-align: center; border: 1px solid black; padding: 8px;">Qty
+                                        <br/>
+                                        الكمية
+                                    </th>
+                                    <th style="text-align: center; border: 1px solid black; padding: 8px;">Unit
+                                        <br/>
+                                        الوحدة
+                                    </th>
+                                    <th style="text-align: center; border: 1px solid black; padding: 8px;">Price
+                                        <br/>
+                                        السعر
+                                    </th>
+                                    <th style="text-align: center; border: 1px solid black; padding: 8px;">Total
+                                        <br/>
+                                        المجموع
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="i" t-value="0"/>
+                                <t t-foreach="doc.invoice_line_ids" t-as="line">
+                                    <t t-set="i" t-value="i+1"/>
+                                    <tr>
+                                        <td style="text-align: center; border: 1px solid black; padding: 8px;">
+                                            <span t-esc="str(convert_to_arabic(i))"/>
+                                            <br/>
+                                            <span t-esc="i"/>
+                                        </td>
+                                        <td style="text-align: center; border: 1px solid black; padding: 8px;">
+                                            <br/>
+                                            <t t-esc="line.product_id.default_code or ''"/>
+                                        </td>
+                                        <td style="text-align: center; border: 1px solid black; padding: 8px;">
+                                            <br/>
+                                            <t t-esc="line.product_id.name"/>
+                                        </td>
+
+                                        <td style="text-align: center; border: 1px solid black; padding: 8px;">
+                                            <span t-esc="str(convert_to_arabic(line.quantity))"/>
+                                            <br/>
+                                            <t t-esc="line.quantity"/>
+                                        </td>
+                                         <td style="text-align: center; border: 1px solid black; padding: 8px;">
+                                            <br/>
+                                            <t t-esc="line.product_uom_id.name"/>
+                                        </td>
+                                        <td style="text-align: center; border: 1px solid black; padding: 8px;">
+                                            <span t-esc="str(convert_to_arabic(line.price_unit))"/>
+                                            <br/>
+                                            <t t-esc="line.price_unit"/>
+                                        </td>
+                                        <td style="text-align: center; border: 1px solid black; padding: 8px;">
+                                            <span t-esc="str(convert_to_arabic(line.price_subtotal))"/>
+                                            <br/>
+                                            <t t-esc="line.price_subtotal"/>
+                                        </td>
+                                    </tr>
+
+                                </t>
+                                <tr style="background-color:#C5C5C5; font-size: 15px;">
+                                    <td colspan="4">
+                                        <span t-field="doc.amount_in_words"/>
+                                        <br/>
+                                        .
+                                        <t t-esc="doc.amount_in_words_arabic"/>
+                                    </td>
+                                    <td colspan="2">
+                                        SubTotals
+                                        <br/>
+                                        المجموع الفرعي
+                                        <br/>
+                                        <br/>
+                                        Discount
+                                        <br/>
+                                        الخصم
+                                        <br/>
+                                        Totals
+                                        <br/>
+                                        المجموع الكلي
+
+                                    </td>
+                                    <td colspan="1">
+                                        <t t-esc="doc.total_subtotal"/>
+                                        <br/>
+                                        <span t-esc="str(convert_to_arabic(doc.total_subtotal))"/>
+                                        <br/>
+                                        <t t-esc="doc.total_discount"/>
+                                        <br/>
+                                        <span t-esc="str(convert_to_arabic(doc.total_discount))"/>
+                                        <br/>
+                                        <t t-esc="doc.amount_total"/>
+                                        <br/>
+                                        <span t-esc="str(convert_to_arabic(doc.amount_total))"/>
+
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br/>
+                        <br/>
+                        <div class="row" style="color: blue;">
+                            <div class="col-4">
+                                <hr style="border-top: 1px solid black; margin-top: 5px; margin-bottom: 5px; width: 80%;"/>
+
+                                Authorized Signature
+
+                            </div>
+                            <div class="col-4">
+                                <hr style="border-top: 1px solid black; margin-top: 5px; margin-bottom: 5px; width: 80%;"/>
+
+                                Receiver Signature
+
+                            </div>
+                            <div class="col-4">
+
+                            </div>
+                        </div>
+                        <div>
+                            <br/>
+                            <strong style="color: blue;">
+                                Printing Date &amp; Time :
+                                <t t-esc="(datetime.datetime.now() + datetime.timedelta(hours=2)).strftime('%Y-%m-%d %H:%M:%S')"/>
+                            </strong>
+
+                            <div style="color: blue;">
+                                <t t-if="doc.narration">
+                                    <p t-field="doc.narration" name="order_note"/>
+                                </t>
+
+                                <t t-else="">
+                                    Terms &amp; Conditions
+                                </t>
+                                <div style="border-bottom: 1px solid #000; margin-top: 5px;"></div> <!-- Line below the note -->
+                            </div>
+                            <div class="row">
+                                <div>
+                                    <center>
+                                        <table class="table table-borderless" style="font-size: 15px;" >
+
+                                            <td style="width:60%">
+                                                <strong>For Online Approval To This Quotation Kindly</strong>
+                                                <br/>
+                                                <strong>Scan the QRCode AND Follow The Steps:</strong>
+
+
+                                            </td>
+                                            <t t-set="barcode_size" t-value="'width:43mm;height:10mm'"/>
+
+                                            <td style="width:40%">
+                                                <div class="text-center o_label_small_barcode">
+                                                    <t t-if="doc.barcode">
+                                                        <div t-out="doc.barcode" style="padding:0"
+                                                             t-options="{'widget': 'barcode', 'symbology': 'auto', 'img_style': barcode_size}"/>
+                                                        <span class="text-center" t-out="barcode"/>
+                                                    </t>
+                                                </div>
+                                                <!--                                            <img t-if="doc.barcode"-->
+                                                <!--                                                 t-att-src="'/report/barcode?barcode=' + doc.barcode + '&amp;type=EAN13&amp;width=200&amp;height=100'"/>-->
+
+                                            </td>
+                                        </table>
+                                    </center>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </t>
+            </t>
+
+        </t>
+    </template>
+</odoo>

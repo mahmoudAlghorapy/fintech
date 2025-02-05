@@ -83,6 +83,16 @@
 		<menuitem name="Biometric Device" id="hr_biometric_device_configuration_menu" parent="hr_attendance.menu_hr_attendance_settings" action="biomtericdeviceinfo_action" sequence="2" />
 			
 		<menuitem name="Settings" id="menu_hr_attendance_settings" groups="hr_attendance.group_hr_attendance_manager" parent="hr_attendance.menu_hr_attendance_settings" action="hr_attendance.action_hr_attendance_settings" sequence="20" />
+		<menuitem name="Manage Attendances" id="menu_hr_attendance_manage_attendances"
+                  parent="hr_attendance.menu_hr_attendance_settings" sequence="3"
+                  groups="hr_attendance.group_hr_attendance_manager"/>
+
+        <record model="ir.ui.menu" id="hr_attendance.menu_hr_attendance_view_attendances">
+            <field name="parent_id" ref="hr_attendance.menu_hr_attendance_settings"/>
+            <field name="name" >Attendances</field>
+        </record>
+
+
 
 	</data>
 </odoo>

@@ -109,14 +109,14 @@ class BiomtericDeviceInfo(models.Model):
                             else:
                                 action = self.action
                             if action != False:
-                                if not employees.name.id:
+                                if not employees.name.employee_id:
                                     _logger.info('No Employee record found to be associated with User ID: ' + str(att_id)+ ' on Finger Print Mahcine')
                                     continue
-                                atten_ids = hr_attendance.search([('employee_id','=',employees.name.id), ('name','=',atten_time)])
+                                atten_ids = hr_attendance.search([('employee_id.employee_id','=',employees.name.employee_id), ('name','=',atten_time)])
                                 atten_time = now_datetime = datetime.datetime.strptime(atten_time, DEFAULT_SERVER_DATETIME_FORMAT)
                                 
                                 time_with_seconds = atten_time - datetime.timedelta(seconds=float(bunch_seconds))
-                                duplicated_recs = hr_attendance.search([('employee_id','=',employees.name.id),
+                                duplicated_recs = hr_attendance.search([('employee_id.employee_id','=',employees.name.employee_id),
                                                                         ('name','>',time_with_seconds),
                                                                         ('name','<=',atten_time)])
                                 if duplicated_recs:
@@ -124,13 +124,13 @@ class BiomtericDeviceInfo(models.Model):
                                 if atten_ids:
                                     _logger.info('Attendance For Employee' + str(employees.name.name)+ 'on Same time Exist')
                                     atten_ids.write({'name':atten_time,
-                                                     'employee_id':employees.name.id,
+                                                     'employee_id': employees.name.id,
                                                      'date':lattendance.timestamp.date(),
                                                      'attendance_status': action,
                                                      'day_name': lattendance.timestamp.strftime('%A')})
                                 else:
                                     atten_id = hr_attendance.create({'name':atten_time,
-                                                                     'employee_id':employees.name.id,
+                                                                     'employee_id': employees.name.id,
                                                                      'date':lattendance.timestamp.date(),
                                                                      'attendance_status': action,
                                                                      'day_name': lattendance.timestamp.strftime('%A')})
@@ -199,11 +199,12 @@ class BiomtericDeviceInfo(models.Model):
                         atten_time = datetime.datetime.strftime(local_date, DEFAULT_SERVER_DATETIME_FORMAT)
                         att_id = lattendance.user_id or ''
                         employees = self.env['employee.attendance.devices'].search([('attendance_id', '=', att_id), ('device_id', '=', self.id)])
+                        print('employees')
                         try:
                             punch_flag = lattendance.punch
                             if self.api_type == 'legacy':
                                 punch_flag = lattendance.status
-                            
+
                             if self.action == 'both':
                                 if str(punch_flag) in list(self.sign_in):
                                     action = 'sign_in'
@@ -214,14 +215,14 @@ class BiomtericDeviceInfo(models.Model):
                             else:
                                 action = self.action
                             if action != False:
-                                if not employees.name.id:
+                                if not employees.name.employee_id:
                                     _logger.info('No Employee record found to be associated with User ID: ' + str(att_id)+ ' on Finger Print Mahcine')
                                     continue
-                                atten_ids = hr_attendance.search([('employee_id','=',employees.name.id), ('name','=',atten_time)])
+                                atten_ids = hr_attendance.search([('employee_id.employee_id','=',employees.name.employee_id), ('name','=',atten_time)])
                                 atten_time = now_datetime = datetime.datetime.strptime(atten_time, DEFAULT_SERVER_DATETIME_FORMAT)
                                 
                                 time_with_seconds = atten_time - datetime.timedelta(seconds=float(bunch_seconds))
-                                duplicated_recs = hr_attendance.search([('employee_id','=',employees.name.id),
+                                duplicated_recs = hr_attendance.search([('employee_id.employee_id','=',employees.name.employee_id),
                                                                         ('name','>',time_with_seconds),
                                                                         ('name','<=',atten_time)])
                                 if duplicated_recs:
@@ -229,18 +230,19 @@ class BiomtericDeviceInfo(models.Model):
                                 if atten_ids:
                                     _logger.info('Attendance For Employee' + str(employees.name.name)+ 'on Same time Exist')
                                     atten_ids.write({'name':atten_time,
-                                                     'employee_id':employees.name.id,
-                                                     'device_id': self.id,
+                                                     'employee_id': employees.name.id,
+                                                     # 'device_id': self.id,
                                                      'date':lattendance.timestamp.date(),
                                                      'attendance_status': action,
                                                      'day_name': lattendance.timestamp.strftime('%A')})
                                 else:
                                     atten_id = hr_attendance.create({'name':atten_time,
-                                                                     'employee_id':employees.name.id,
-                                                                     'device_id': self.id,
+                                                                     'employee_id': employees.name.id,
+                                                                     # 'device_id': self.id,
                                                                      'date':lattendance.timestamp.date(),
                                                                      'attendance_status': action,
                                                                      'day_name': lattendance.timestamp.strftime('%A')})
+                                    print('atten_id',atten_id)
                                     _logger.info('Creating Draft Attendance Record: ' + str(atten_id) + 'For '+ str(employees.name.name))                                
                         except Exception as e:
                             _logger.error('Exception' + str(e))

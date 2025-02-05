@@ -16,6 +16,7 @@
         'security/biometricdevice_security.xml',
         'security/ir.model.access.csv',
         'views/res_config_settings_view.xml',
+        'views/hr_employee.xml',
         'views/hr_attendance_view.xml',
         'views/biometricdevice_view.xml',
         'views/hr_extensionview.xml',

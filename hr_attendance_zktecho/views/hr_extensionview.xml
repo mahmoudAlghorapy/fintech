@@ -11,7 +11,7 @@
                 <data>
                     <xpath expr="//page[@name='hr_settings']" position="after">
                         <page string="Attendance Devices" name="attendance_device"
-                              groups="hr_attendance_zktecho.group_hr_attendance_user">
+                             >
                             <field name="attendance_devices" nolabel="1" context="{'default_name':active_id}"
                                    help="All the attendance devices linked to the employee are to be defined here"/>
                         </page>
@@ -141,23 +141,15 @@
             <field name="view_mode">tree,form</field>
             <field name="context">{'search_default_unmoved':1}</field>
         </record>
+         <menuitem name="Draft Attendances" id="hr_draft_attendance_menu" parent="hr_attendance.menu_hr_attendance_settings"
+                  action="hr_attendance_zktecho.hrdraftattendance_action" sequence="2"
+                  groups="hr_attendance.group_hr_attendance_manager"/>
 
         <!-- Menu for Draft Attendance -->
         <menuitem id="menu_hr_attendance_view_attendances2" name="Overview" parent="hr_attendance.menu_hr_attendance_root" sequence="2"
                   groups="hr_attendance.group_hr_attendance_officer" action="hr_attendance.hr_attendance_action"/>
 
-        <menuitem name="Manage Attendances" id="menu_hr_attendance_manage_attendances"
-                  parent="hr_attendance.menu_hr_attendance_root" sequence="3"
-                  groups="hr_attendance_zktecho.group_hr_attendance_user"/>
 
-        <record model="ir.ui.menu" id="hr_attendance.menu_hr_attendance_view_attendances">
-            <field name="parent_id" ref="hr_attendance_zktecho.menu_hr_attendance_manage_attendances"/>
-            <field name="name" >Attendances</field>
-        </record>
-
-        <menuitem name="Draft Attendances" id="hr_draft_attendance_menu" parent="menu_hr_attendance_manage_attendances"
-                  action="hrdraftattendance_action" sequence="2"
-                  groups="hr_attendance_zktecho.group_hr_attendance_user"/>
 
     </data>
 </odoo>
