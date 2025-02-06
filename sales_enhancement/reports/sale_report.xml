@@ -13,7 +13,7 @@
         <field name="margin_bottom">25</field>
         <field name="margin_left">0</field>
         <field name="margin_right">0</field>
-        <field name="dpi">100</field>
+        <field name="dpi">105</field>
     </record>
 
     <record id="sale_order_quotations_report" model="ir.actions.report">
