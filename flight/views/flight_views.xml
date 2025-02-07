@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Flight Tree View -->
+    <record id="view_flight_tree" model="ir.ui.view">
+        <field name="name">flight.flight.tree</field>
+        <field name="model">flight.flight</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="date" />
+                <field name="aircraft_id" />
+                <field name="departure_id" />
+                <field name="arrival_id" />
+                <field name="locked" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Flight Form View -->
+    <record id="view_flight_form" model="ir.ui.view">
+        <field name="name">flight.flight.form</field>
+        <field name="model">flight.flight</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+            name="toggle_locked"
+            type="object"
+            string="Lock"
+           invisible="locked ==True"
+            groups="flight.group_flight_manager"
+          />
+                    <button
+            name="toggle_locked"
+            type="object"
+            string="Unlock"
+            invisible="locked == False"
+            groups="flight.group_flight_manager"
+          />
+                </header>
+                <sheet>
+                    <div name="button_box" class="oe_button_box" />
+                    <group>
+                        <field name="date" />
+                        <field name="aircraft_id" />
+                        <field name="departure_id" />
+                        <field name="arrival_id" />
+                        <field name="locked" />
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" />
+                    <field name="activity_ids" />
+                    <field name="message_ids" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Lock Flights Server Action -->
+    <record id="action_lock_flights" model="ir.actions.server">
+        <field name="name">Lock Selected Flights</field>
+        <field name="model_id" ref="model_flight_flight" />
+        <field name="binding_model_id" ref="model_flight_flight" />
+        <field name="state">code</field>
+        <field name="code">
+            records.filtered(lambda r: not r.locked).write({'locked': True})
+        </field>
+        <field
+      name="groups_id"
+      eval="[(4, ref('flight.group_flight_manager'))]"
+    />
+    </record>
+
+    <!-- Unlock Flights Server Action -->
+    <record id="action_unlock_flights" model="ir.actions.server">
+        <field name="name">Unlock Selected Flights</field>
+        <field name="model_id" ref="model_flight_flight" />
+        <field name="binding_model_id" ref="model_flight_flight" />
+        <field name="state">code</field>
+        <field name="code">
+            records.filtered(lambda r: r.locked).write({'locked': False})
+        </field>
+        <field
+      name="groups_id"
+      eval="[(4, ref('flight.group_flight_manager'))]"
+    />
+    </record>
+
+    <!-- Flight Search View -->
+    <record id="view_flight_search" model="ir.ui.view">
+        <field name="name">flight.flight.search</field>
+        <field name="model">flight.flight</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="date" />
+                <field name="aircraft_id" />
+                <field name="departure_id" />
+                <field name="arrival_id" />
+                <filter
+          string="Locked"
+          name="locked"
+          domain="[('locked', '=', True)]"
+        />
+                <filter
+          string="Unlocked"
+          name="unlocked"
+          domain="[('locked', '=', False)]"
+        />
+                <group expand="0" string="Group By">
+                    <filter
+            string="Aircraft"
+            name="group_by_aircraft"
+            context="{'group_by': 'aircraft_id'}"
+          />
+                    <filter
+            string="Departure"
+            name="group_by_departure"
+            context="{'group_by': 'departure_id'}"
+          />
+                    <filter
+            string="Arrival"
+            name="group_by_arrival"
+            context="{'group_by': 'arrival_id'}"
+          />
+                    <filter
+            string="Date"
+            name="group_by_date"
+            context="{'group_by': 'date'}"
+          />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Flight Action Window -->
+    <record id="action_flight_flight_list" model="ir.actions.act_window">
+        <field name="name">Flights</field>
+        <field name="res_model">flight.flight</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_flight_search" />
+    </record>
+</odoo>
