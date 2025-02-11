@@ -153,19 +153,19 @@
                                     <tr>
                                         <td style="text-align: center; border: 1px solid black; padding: 8px;">
 <!--                                            <span t-esc="str(convert_to_arabic(i))"/>-->
-                                            <br/>
+<!--                                            <br/>-->
                                             <span t-esc="i"/>
                                         </td>
                                         <td style="text-align: center; border: 1px solid black; padding: 8px;">
-                                            <br/>
+<!--                                            <br/>-->
                                             <t t-esc="line.product_id.default_code or ''"/>
                                         </td>
                                         <td style="text-align: center; border: 1px solid black; padding: 8px;">
-                                            <br/>
+<!--                                            <br/>-->
                                             <t t-esc="line.product_id.name"/>
                                         </td>
                                         <td style="text-align: center; border: 1px solid black; padding: 8px;">
-                                            <br/>
+<!--                                            <br/>-->
                                             <t t-esc="line.product_uom.name"/>
                                         </td>
                                         <td style="text-align: center; border: 1px solid black; padding: 8px;">
