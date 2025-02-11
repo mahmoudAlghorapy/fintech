@@ -30,7 +30,7 @@
                     <div class="page" style="direction:ltr;font-size:13.0pt; font-family:Calibri; font-weight:normal;">
                         <div class="header">
 
-                            <div class="logo col-12" style=" margin-right:300px; ">
+                            <div class="logo col-12" style=" margin-left:80px; ">
                                 <img src="/sales_enhancement/static/src/img/header.png"
                                      style="max-height: 150px;max-width:100%;" alt="Logo"/>
                             </div>
@@ -53,11 +53,11 @@
                                         <td style="width:50%">
 
                                             <t t-if="doc.partner_id">
-                                                <h2 class="mt-4">
+                                                <h4 class="mt-4">
                                                     <strong>To:</strong>
-                                                    <br/>
+<!--                                                    <br/>-->
                                                     <span t-field="doc.partner_id"/>
-                                                </h2>
+                                                </h4>
                                             </t>
                                             <strong>Phone Number:</strong>
                                             <span t-field="doc.partner_id.phone"/>
@@ -152,7 +152,7 @@
                                     <t t-set="i" t-value="i+1"/>
                                     <tr>
                                         <td style="text-align: center; border: 1px solid black; padding: 8px;">
-                                            <span t-esc="str(convert_to_arabic(i))"/>
+<!--                                            <span t-esc="str(convert_to_arabic(i))"/>-->
                                             <br/>
                                             <span t-esc="i"/>
                                         </td>
@@ -169,18 +169,18 @@
                                             <t t-esc="line.product_uom.name"/>
                                         </td>
                                         <td style="text-align: center; border: 1px solid black; padding: 8px;">
-                                            <span t-esc="str(convert_to_arabic(line.product_uom_qty))"/>
-                                            <br/>
+<!--                                            <span t-esc="str(convert_to_arabic(line.product_uom_qty))"/>-->
+<!--                                            <br/>-->
                                             <t t-esc="line.product_uom_qty"/>
                                         </td>
                                         <td style="text-align: center; border: 1px solid black; padding: 8px;">
-                                            <span t-esc="str(convert_to_arabic(line.price_unit))"/>
-                                            <br/>
+<!--                                            <span t-esc="str(convert_to_arabic(line.price_unit))"/>-->
+<!--                                            <br/>-->
                                             <t t-esc="line.price_unit"/>
                                         </td>
                                         <td style="text-align: center; border: 1px solid black; padding: 8px;">
-                                            <span t-esc="str(convert_to_arabic(line.price_subtotal))"/>
-                                            <br/>
+<!--                                            <span t-esc="str(convert_to_arabic(line.price_subtotal))"/>-->
+<!--                                            <br/>-->
                                             <t t-esc="line.price_subtotal"/>
                                         </td>
                                     </tr>
@@ -195,31 +195,32 @@
                                     </td>
                                     <td colspan="2">
                                         SubTotals
-                                        <br/>
+                                        /
                                         المجموع الفرعي
                                         <br/>
                                         <br/>
                                         Discount
-                                        <br/>
+                                        /
                                         الخصم
                                         <br/>
-                                        Totals
                                         <br/>
+                                        Totals
+                                        /
                                         المجموع الكلي
 
                                     </td>
                                     <td colspan="1">
                                         <t t-esc="doc.total_subtotal"/>
                                         <br/>
-                                        <span t-esc="str(convert_to_arabic(doc.total_subtotal))"/>
+<!--                                        <span t-esc="str(convert_to_arabic(doc.total_subtotal))"/>-->
                                         <br/>
                                         <t t-esc="doc.total_discount"/>
                                         <br/>
-                                        <span t-esc="str(convert_to_arabic(doc.total_discount))"/>
+<!--                                        <span t-esc="str(convert_to_arabic(doc.total_discount))"/>-->
                                         <br/>
                                         <t t-esc="doc.amount_total"/>
-                                        <br/>
-                                        <span t-esc="str(convert_to_arabic(doc.amount_total))"/>
+<!--                                        <br/>-->
+<!--                                        <span t-esc="str(convert_to_arabic(doc.amount_total))"/>-->
 
                                     </td>
 
@@ -247,7 +248,7 @@
                                             <!--                                            </t>-->
                                             <!--                                            <br/>-->
                                             <strong>Validity:</strong>
-                                            <br/>
+<!--                                            <br/>-->
                                             <span t-field="doc.validity_date"/>
                                             <br/>
                                             <strong>Warranty:</strong>

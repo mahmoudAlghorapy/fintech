@@ -15,6 +15,8 @@ class SaleOrder(models.Model):
     ], string='Has Warranty?',)
     delivery_date = fields.Text(string="Delivery Date", required=False, )
     barcode = fields.Char(string='Barcode', compute='_compute_barcode', copy=False)
+    def action_print_quotation_report(self):
+        return self.env.ref('sales_enhancement.sale_order_quotations_report').report_action(self)
 
 
     def _prepare_invoice(self):
