@@ -1,0 +1,7 @@
+<odoo>
+
+    <record id="group_odoo_apps" model="res.groups">
+        <field name="name">Odoo APPS Group</field>
+    </record>
+
+</odoo>

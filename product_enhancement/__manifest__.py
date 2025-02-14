@@ -5,6 +5,7 @@
     'version': '17.0',
     'depends': ['product', 'base'],
     'data': [
+        'security/groups.xml',
         'security/ir.model.access.csv',
         'views/brand.xml',
         'views/model.xml',

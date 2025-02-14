@@ -30,6 +30,7 @@ class ProductTemplateInherit(models.Model):
         string="Part Number with Source",
         help="Stores part numbers and their sources in a text format."
     )
+    detailed_type = fields.Selection(default='product')
 
     # barcode = fields.Char(
     #     'Barcode', copy=False, compute='_compute_barcode',

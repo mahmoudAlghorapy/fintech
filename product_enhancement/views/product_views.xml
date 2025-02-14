@@ -52,6 +52,10 @@
             </xpath>
         </field>
     </record>
+    <record id="base.menu_management" model="ir.ui.menu">
+        <field name="groups_id" eval="[(4, ref('product_enhancement.group_odoo_apps'))]"/>
+
+    </record>
 
 
 
