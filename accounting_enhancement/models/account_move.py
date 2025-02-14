@@ -17,6 +17,8 @@ class AccountMove(models.Model):
     delivery_note = fields.Text(string="Delivery Note", required=False, )
     barcode = fields.Char(string='Barcode', compute='_compute_barcode', copy=False)
     sale_order_id = fields.Many2one(comodel_name="sale.order", string="sale", required=False, )
+    def action_print_quotation_report(self):
+        return self.env.ref('accounting_enhancement.invoice_template_report').report_action(self)
 
     @api.depends('invoice_line_ids')
     def compute_total_subtotal(self):

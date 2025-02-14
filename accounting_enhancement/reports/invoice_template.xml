@@ -53,7 +53,7 @@
 
                                 <t t-if="doc.partner_id">
                                     <strong>To:</strong>
-                                    <br/>
+<!--                                    <br/>-->
                                     <strong style="color: blue;">
                                         <span t-field="doc.partner_id"/>
                                     </strong>
