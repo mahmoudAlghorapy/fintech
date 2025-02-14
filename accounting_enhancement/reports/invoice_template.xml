@@ -168,36 +168,36 @@
                                     <t t-set="i" t-value="i+1"/>
                                     <tr>
                                         <td style="text-align: center; border: 1px solid black; padding: 8px;">
-                                            <span t-esc="str(convert_to_arabic(i))"/>
-                                            <br/>
+<!--                                            <span t-esc="str(convert_to_arabic(i))"/>-->
+<!--                                            <br/>-->
                                             <span t-esc="i"/>
                                         </td>
                                         <td style="text-align: center; border: 1px solid black; padding: 8px;">
-                                            <br/>
+<!--                                            <br/>-->
                                             <t t-esc="line.product_id.default_code or ''"/>
                                         </td>
                                         <td style="text-align: center; border: 1px solid black; padding: 8px;">
-                                            <br/>
+<!--                                            <br/>-->
                                             <t t-esc="line.product_id.name"/>
                                         </td>
 
                                         <td style="text-align: center; border: 1px solid black; padding: 8px;">
-                                            <span t-esc="str(convert_to_arabic(line.quantity))"/>
-                                            <br/>
+<!--                                            <span t-esc="str(convert_to_arabic(line.quantity))"/>-->
+<!--                                            <br/>-->
                                             <t t-esc="line.quantity"/>
                                         </td>
                                          <td style="text-align: center; border: 1px solid black; padding: 8px;">
-                                            <br/>
+<!--                                            <br/>-->
                                             <t t-esc="line.product_uom_id.name"/>
                                         </td>
                                         <td style="text-align: center; border: 1px solid black; padding: 8px;">
-                                            <span t-esc="str(convert_to_arabic(line.price_unit))"/>
-                                            <br/>
+<!--                                            <span t-esc="str(convert_to_arabic(line.price_unit))"/>-->
+<!--                                            <br/>-->
                                             <t t-esc="line.price_unit"/>
                                         </td>
                                         <td style="text-align: center; border: 1px solid black; padding: 8px;">
-                                            <span t-esc="str(convert_to_arabic(line.price_subtotal))"/>
-                                            <br/>
+<!--                                            <span t-esc="str(convert_to_arabic(line.price_subtotal))"/>-->
+<!--                                            <br/>-->
                                             <t t-esc="line.price_subtotal"/>
                                         </td>
                                     </tr>
@@ -212,31 +212,34 @@
                                     </td>
                                     <td colspan="2">
                                         SubTotals
-                                        <br/>
+                                        /
                                         المجموع الفرعي
                                         <br/>
                                         <br/>
                                         Discount
-                                        <br/>
+                                        /
                                         الخصم
                                         <br/>
-                                        Totals
                                         <br/>
+                                        Totals
+                                       /
                                         المجموع الكلي
 
                                     </td>
                                     <td colspan="1">
                                         <t t-esc="doc.total_subtotal"/>
+<!--                                        <br/>-->
+<!--                                        <span t-esc="str(convert_to_arabic(doc.total_subtotal))"/>-->
                                         <br/>
-                                        <span t-esc="str(convert_to_arabic(doc.total_subtotal))"/>
                                         <br/>
-                                        <t t-esc="doc.total_discount"/>
+                                        <t t-esc="doc.total_discount" digits="40,2"/>
+<!--                                        <br/>-->
+<!--                                        <span t-esc="str(convert_to_arabic(doc.total_discount))" digits="40,2"/>-->
                                         <br/>
-                                        <span t-esc="str(convert_to_arabic(doc.total_discount))"/>
                                         <br/>
                                         <t t-esc="doc.amount_total"/>
-                                        <br/>
-                                        <span t-esc="str(convert_to_arabic(doc.amount_total))"/>
+<!--                                        <br/>-->
+<!--                                        <span t-esc="str(convert_to_arabic(doc.amount_total))"/>-->
 
                                     </td>
 
